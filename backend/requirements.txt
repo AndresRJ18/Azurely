@@ -1,0 +1,9 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+pydantic-settings==2.4.0
+azure-cognitiveservices-speech==1.40.0
+openai==1.51.0
+ffmpeg-python==0.2.0
+aiofiles==24.1.0
+python-dotenv==1.0.1
