@@ -22,16 +22,20 @@ async def health_check():
     except Exception:
         pass
 
-    # verifica OpenAI — lista los deployments disponibles
+    # verifica OpenAI — request mínimo para validar conectividad
     try:
         client = OpenAI(
-            base_url="https://azurely-openai.openai.azure.com/openai/v1",
+            base_url=settings.AZURE_OPENAI_ENDPOINT,
             api_key=settings.AZURE_OPENAI_KEY
         )
-        client.models.list()
+        client.chat.completions.create(
+            model=settings.AZURE_OPENAI_DEPLOYMENT,
+            messages=[{"role": "user", "content": "hi"}],
+            max_tokens=1
+        )
         azure_openai_ok = True
     except Exception as e:
-        print(f"OpenAI error: {e}")  # <-- aquí
+        print(f"OpenAI error: {e}")
         pass
 
     return {
